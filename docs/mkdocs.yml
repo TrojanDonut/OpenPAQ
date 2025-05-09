@@ -1,0 +1,74 @@
+site_name: OpenPAQ
+repo_url: https://github.com/DENICeG/OpenPAQ
+
+
+nav:
+  - Overview: index.md
+  - Getting Started: getting_started.md
+  - Installation: installation.md
+  - Usage: usage.md
+  - OpenAPI: open_api.md
+  - Development: development.md
+  - Contribution: contributions.md
+  - License & EOL: license.md
+
+plugins:
+  - privacy
+  - swagger-ui-tag
+  - search:
+      lang: en
+
+
+
+theme:
+  logo: img/logo.png
+  name: material
+  features:
+    - content.code.copy
+    - content.tabs.link
+    - content.code.annotate
+    - navigation.footer
+  palette:
+    scheme: slate
+    primary: custom
+  font:
+    text: Proxima Nova
+
+
+extra_css:
+  - stylesheets/extra.css
+
+markdown_extensions:
+  - attr_list
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - md_in_html
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+  - tables
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true
+      slugify: !!python/object/apply:pymdownx.slugs.slugify
+        kwds:
+          case: lower
+
+extra:
+  consent:
+    title: Cookie consent
+    description: >-
+      We use cookies to recognize your repeated visits and preferences, as well
+      as to measure the effectiveness of our documentation and whether users
+      find what they're searching for. With your consent, you're helping us to
+      make our documentation better.
+
+  social:
+    - icon: fontawesome/solid/globe
+      link: https://www.denic.de
+      name: DENIC eG
