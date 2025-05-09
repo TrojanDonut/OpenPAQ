@@ -1,0 +1,13 @@
+.md-grid {
+    max-width: initial;
+
+}
+.md-search {
+    padding-right: 5px;
+}
+
+:root  > * {
+    --md-primary-fg-color: #007a9d;
+    --md-primary-fg-color--light: #f7dcd2;
+    --md-primary-fg-color--dark: #d94e1f;
+}
