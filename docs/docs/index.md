@@ -1,9 +1,8 @@
 # Overview
 
-OpenPAQ (**OpenP**ostal **A**ddress **Q**uality) is a tool to validate parts of a postal address. Therefore, it provides an HTTP-API endpoint to provide the
-relevant data. 
+OpenPAQ (**OpenP**ostal **A**ddress **Q**uality) is a tool to validate parts of a postal address. Checks are done via an HTTP-Endpoint.
 
-Actually following data will be checked and validated:
+The following data will be checked:
 
 - street
 - city
@@ -11,8 +10,7 @@ Actually following data will be checked and validated:
 - country code
 
 
-OpenPAQ use a Nominatim service in the background to check the addresses. Actually OpenPAQ is tested with a self-hosted
-version and with the API from openstreetmap.org.
+OpenPAQ uses [Nominatim](https://github.com/osm-search/Nominatim) in the background to check addresses. OpenPAQ is tested against a self-hosted version of the Nominatim docker container from [mediagis](https://github.com/mediagis/nominatim-docker).
 
 <br>
 <div class="grid cards" markdown>
@@ -21,7 +19,7 @@ version and with the API from openstreetmap.org.
 
     ---
 
-    Download container and set up a minimal instance
+    Download a container and set it up with a minimal instance
 
     [:octicons-arrow-right-24: Getting started](getting_started.md)
 
@@ -31,17 +29,17 @@ version and with the API from openstreetmap.org.
 
     Adjust the configuration to your needs
 
-    [:octicons-arrow-right-24: Installation](installation.md)
+    [:octicons-arrow-right-24: Configuration](configuration.md)
 
--   :material-chat-question-outline:{ .lg .middle } __What does this mean?__
+-   :material-chat-question-outline:{ .lg .middle } __Understanding OpenPAQ's responses__
 
     ---
 
-    Get further information what the response of a request mean and how to interpret it
+    Get further information what the response of a request mean
     
-    [:octicons-arrow-right-24: Customization](usage.md)
+    [:octicons-arrow-right-24: Interpretation of Results](usage.md)
 
--   :material-code-json:{ .lg .middle } __Code, Code, Code...__
+-   :material-code-json:{ .lg .middle } __Internals__
 
     ---
 
@@ -49,21 +47,22 @@ version and with the API from openstreetmap.org.
 
     [:octicons-arrow-right-24: Development](development.md)
   
-- :material-scale-balance:{ .lg .middle } __You want to help?!__
+-   :material-scale-balance:{ .lg .middle } __Contribute to the project__
 
     ---
 
-    All about how to contribute to the project
+    How to report bugs or make feature and pull requests
 
     [:octicons-arrow-right-24: Contribution](contributions.md)
 
-- :material-scale-balance:{ .lg .middle } __Open Source, MIT__
+- :material-scale-balance:{ .lg .middle } __License terms__
 
     ---
 
-    Material for MkDocs is licensed under MIT and available on [GitHub]
+    OpenPAQ is licensed under AGPL
+   
 
-    [:octicons-arrow-right-24: License](#)
+    [:octicons-arrow-right-24: License & EOL](license.md)
 
 </div>
 

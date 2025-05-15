@@ -1,3 +1,31 @@
+## Make a first request
+
+```shell
+    curl http://127.0.0.1:8001/api/v1/check\
+    ?street=Köpenicker Landstr 252\
+    &postal_code=12347\
+    &city=Berlin Treptow\
+    &country_code=DE\
+    &debug_details=true
+```
+
+The response should look like this:
+```json
+{
+  "street": "Max Mustermann,Koepenicker Landstr 252",
+  "city": "Berlin Treptow",
+  "postal_code": "12437",
+  "country_code": "de",
+  "street_matched": true,
+  "city_matched": true,
+  "postal_code_matched": true,
+  "city_to_postal_code_matched": true,
+  "country_code_matched": true,
+  "version": "test-version"
+}
+```
+
+
 ## Interpretation of OpenPAQ's results
 
 OpenPAQ is a powerful tool for verifying the existence of arbitrary addresses worldwide. During the validation process, input addresses are first preprocessed using a set of country-specific rules.
@@ -102,11 +130,11 @@ flowchart TD
     A2 --> A3[Normalized Input:
     - berlin treptow
     - max mustermann
-    - koepenicker landstrasse
+    - koepenicker landstr
     - 12437]
 
     A3 --> A4.1[Nominatim Request:
-    - search?q=berlin treptow, koepenicker landstrasse
+    - search?q=berlin treptow, koepenicker landstr
     ⛳]
 
     A3 --> A4.2[Nominatim Request:
@@ -118,14 +146,25 @@ flowchart TD
     - Berlin]
 
     A5 --> A6[Normalize Nominatim Results:
-    - koepenicker Landstrasse
-    - graz]
+    - koepenicker landstrasse
+    - berlin]
 
-    A6 --> A7[Fuzzy Comparison Street:
-    - Compare Input vs. Result
-    - Similarity: 0.8636364]
+    A6 --> A7a[Fuzzy Comparison Street:
+    Compare Input vs. Result
+    **normalized input:** koepenicker landstr
+    **normalized nominatim:** koepenicker landstrasse
+    **Similarity:** 0.8636364]
+    
+    A6 --> A7b["Fuzzy Comparison City:
+    Compare Input vs. Result
+    **normalized input:** 
+    berlin treptow
+    **normalized nominatim:** berlin
+    **Similarity:** 
+    0.42857143 (partial match)"]
 
-    A7 --> A8[Street-City-Check ✅]
+    A7a --> A8[Street-City-Check ✅]
+    A7b --> A8[Street-City-Check ✅]
 
     A8 --> A9[Is street correct? ✅]
     A8 --> A10[Is city correct? ✅]
@@ -136,7 +175,7 @@ flowchart TD
 ## Debug Information
 
 #### parameter
-Validate the setup parameters of the program, that are used in the address evaluation process. These parameters for the moment are in the code, they will be customizable at a later stage.
+Validates the setup parameters of the program, that are used in the address evaluation process. These parameters for the moment are in the code, they will be customizable at a later stage.
 
 ```json
 {

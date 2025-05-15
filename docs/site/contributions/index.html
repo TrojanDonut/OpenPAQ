@@ -16,7 +16,7 @@
       
       
       <link rel="icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.12">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
     
     
       
@@ -24,7 +24,7 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.2afb09e1.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.342714a4.min.css">
       
         
         <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
@@ -41,8 +41,8 @@
         
         
         
-        <link rel="stylesheet" href="../assets/external/fonts.googleapis.com/css.76a30192.css">
-        <style>:root{--md-text-font:"Proxima Nova";--md-code-font:"Roboto Mono"}</style>
+        <link rel="stylesheet" href="../assets/external/fonts.googleapis.com/css.936b8ee8.css">
+        <style>:root{--md-text-font:"Roboto Condensed";--md-code-font:"Roboto Mono"}</style>
       
     
     
@@ -90,7 +90,7 @@
   <nav class="md-header__inner md-grid" aria-label="Header">
     <a href=".." title="OpenPAQ" class="md-header__button md-logo" aria-label="OpenPAQ" data-md-component="logo">
       
-  <img src="../img/logo.png" alt="logo">
+  <img src="../img/openpaq-logo-klein.png" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -199,7 +199,7 @@
   <label class="md-nav__title" for="__drawer">
     <a href=".." title="OpenPAQ" class="md-nav__button md-logo" aria-label="OpenPAQ" data-md-component="logo">
       
-  <img src="../img/logo.png" alt="logo">
+  <img src="../img/openpaq-logo-klein.png" alt="logo">
 
     </a>
     OpenPAQ
@@ -270,12 +270,12 @@
   
   
     <li class="md-nav__item">
-      <a href="../installation/" class="md-nav__link">
+      <a href="../configuration/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
-    Installation
+    Configuration
     
   </span>
   
@@ -485,6 +485,28 @@
   
 
     
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://www.denic.de/ueber-denic/impressum" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Imprint
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
   </ul>
 </nav>
                   </div>
@@ -580,9 +602,7 @@
 
 <h1 id="contributing-to-openpaq">Contributing to OpenPAQ</h1>
 <p>Thank you for your interest in contributing to <strong>OpenPAQ</strong>!</p>
-<p>We welcome all kinds of contributions — whether you're reporting bugs, suggesting features, or submitting pull requests.
-However, please note that <strong>GitHub Issues and Pull Requests are currently disabled</strong> while we finalize an initial version of the project. 
-Once we're ready, we'll announce the opening of community contributions on the project page.</p>
+<p>We welcome all kinds of contributions — whether you're reporting bugs, suggesting features, or submitting pull requests.</p>
 <hr />
 <h2 id="general-guidelines">General Guidelines</h2>
 <p>Once contributions are open, please follow the guidelines below.</p>
@@ -683,6 +703,10 @@ Once we're ready, we'll announce the opening of community contributions on the p
     <div class="md-footer-meta__inner md-grid">
       <div class="md-copyright">
   
+    <div class="md-copyright__highlight">
+      Powered by <a href="https://www.denic.de"> DENIC</a>
+    </div>
+  
   
     Made with
     <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
@@ -713,72 +737,12 @@ Once we're ready, we'll announce the opening of community contributions on the p
     </div>
     
     
-      <div class="md-consent" data-md-component="consent" id="__consent" hidden>
-        <div class="md-consent__overlay"></div>
-        <aside class="md-consent__inner">
-          <form class="md-consent__form md-grid md-typeset" name="consent">
-            
-
-
-  
-
-
-<h4>Cookie consent</h4>
-<p>We use cookies to recognize your repeated visits and preferences, as well as to measure the effectiveness of our documentation and whether users find what they're searching for. With your consent, you're helping us to make our documentation better.</p>
-<input class="md-toggle" type="checkbox" id="__settings" >
-<div class="md-consent__settings">
-  <ul class="task-list">
-    
     
       
+      <script id="__config" type="application/json">{"base": "..", "features": ["content.code.copy", "content.tabs.link", "content.code.annotate", "navigation.footer"], "search": "../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      
-        
-  
-  
-    
-    
-  
-  <li class="task-list-item">
-    <label class="task-list-control">
-      <input type="checkbox" name="github" checked>
-      <span class="task-list-indicator"></span>
-      GitHub
-    </label>
-  </li>
-
-      
-    
-    
-  </ul>
-</div>
-<div class="md-consent__controls">
-  
-    
-      <button class="md-button md-button--primary">Accept</button>
-    
-    
-    
-  
-    
-    
-    
-      <label class="md-button" for="__settings">Manage settings</label>
-    
-  
-</div>
-          </form>
-        </aside>
-      </div>
-      <script>var consent=__md_get("__consent");if(consent)for(var input of document.forms.consent.elements)input.name&&(input.checked=consent[input.name]||!1);else"file:"!==location.protocol&&setTimeout((function(){document.querySelector("[data-md-component=consent]").hidden=!1}),250);var form=document.forms.consent;for(var action of["submit","reset"])form.addEventListener(action,(function(e){if(e.preventDefault(),"reset"===e.type)for(var n of document.forms.consent.elements)n.name&&(n.checked=!1);__md_set("__consent",Object.fromEntries(Array.from(new FormData(form).keys()).map((function(e){return[e,!0]})))),location.hash="",location.reload()}))</script>
-    
-    
-      
-      <script id="__config" type="application/json">{"base": "..", "features": ["content.code.copy", "content.tabs.link", "content.code.annotate", "navigation.footer"], "search": "../assets/javascripts/workers/search.f8cc74c7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
-    
-    
-      <script src="../assets/javascripts/bundle.c8b220af.min.js"></script>
+      <script src="../assets/javascripts/bundle.13a4f30d.min.js"></script>
       
         <script src="../assets/external/unpkg.com/mermaid@11/dist/mermaid.min.js"></script>
       

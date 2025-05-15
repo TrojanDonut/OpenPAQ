@@ -1,12 +1,40 @@
 # Getting started
 
-In this section we'll start an OpenPAQ instance with a minimalistic configuration. 
-All advanced features are disabled, and it will use the openstreetmap.org as backend.
-
+See how to start an OpenPAQ instance with a minimalistic configuration and all optional features disabled.
+Nominatim (openstreetmap.org) is used as the backend for the address to be checked.
 
 !!! warning
-    Please read the usage [policies](https://operations.osmfoundation.org/policies/nominatim/) of openstreetmap.org before starting the configuration and usage
+    * Please read the usage [policies](https://operations.osmfoundation.org/policies/nominatim/) of openstreetmap.org before starting. 
+    * This configuration is only for demonstration purposes. 
+    * Do not use in a production environment. 
 
+### Prerequisites
+
+Install [Docker](https://www.docker.com/) to run a container version of Golang if you want to compile and run the minimal configuration.
+
+Install [Golang](https://go.dev/) when you want to compile and run yourself.
+
+#### optional
+
+- [Clickhouse](https://clickhouse.com/)
+- [Memcached](https://memcached.org/)
+- [OpenSSL](https://www.openssl.org/)
+
+
+
+## Run the project
+
+```shell
+CACHE_ENABLED=false \
+VERSION=testing \
+CLICKHOUSE_ENABLED=false \
+USE_TLS=false \
+USE_JWT=false \
+NOMINATIM_ADDRESS=https://nominatim.openstreetmap.org/search \
+LOG_LEVEL=debug \
+WEBSERVER_LISTEN_ADDRESS=:8001 \
+go run ./cmd/main.go
+```
 
 
 #### Minimal configuration
@@ -28,7 +56,7 @@ ghcr.io/DENICeG/OpenPAQ:latest
 
 #### Example Request
 
-Run your first request against your new OpenPAQ instance:
+Run your request against the new OpenPAQ instance:
 
 === "without debug details"
     ```shell
@@ -53,7 +81,7 @@ Run your first request against your new OpenPAQ instance:
 
 #### Example Response
 
-Congratulation you should get your first response which should look like this:
+Congratulation you should get your first response which should look similar to this:
 
 === "without debug details"
 

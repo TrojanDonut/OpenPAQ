@@ -1,7 +1,6 @@
-OpenPAQ (**OpenP**ostal **A**ddress **Q**uality) is a tool to validate parts of a postal address. Therefore, it provides an HTTP-API endpoint to provide the
-relevant data.
+OpenPAQ (**OpenP**ostal **A**ddress **Q**uality) is a tool to validate parts of a postal address. Checks are done via an HTTP-Endpoint.
 
-Actually following data will be checked and validated:
+The following data will be checked:
 
 - street
 - city
@@ -9,7 +8,6 @@ Actually following data will be checked and validated:
 - country code
 
 
-OpenPAQ use a Nominatim service in the background to check the addresses. Actually OpenPAQ is tested with a self-hosted
-version and with the API from openstreetmap.org.
+OpenPAQ uses [Nominatim](https://github.com/osm-search/Nominatim) in the background to check addresses. OpenPAQ is tested against a self-hosted version from [mediagis](https://github.com/mediagis/nominatim-docker).
 
-Please have a look in the [documentation](https://openpaq.de) for a detailed description of the program.
+Please have a look at the [documentation](https://openpaq.de) for a detailed description of the program.
