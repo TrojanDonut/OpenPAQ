@@ -94,6 +94,38 @@ func (s *Service) checkHandler(ctx *gin.Context) {
 	postalCode := ctx.Query("postal_code")
 	countryCode := ctx.Query("country_code")
 
+	if debugDetails != "true" {
+		debugDetails = "false"
+	}
+
+	if len(street) > 500 {
+		ctx.JSON(http.StatusBadRequest, gin.H{
+			"error": "street field exceed length limit of 500 elements",
+		})
+		return
+	}
+
+	if len(city) > 100 {
+		ctx.JSON(http.StatusBadRequest, gin.H{
+			"error": "city field exceed length limit of 100 elements",
+		})
+		return
+	}
+
+	if len(postalCode) > 50 {
+		ctx.JSON(http.StatusBadRequest, gin.H{
+			"error": "postal code field exceed length limit of 50 elements",
+		})
+		return
+	}
+
+	if len(countryCode) > 2 {
+		ctx.JSON(http.StatusBadRequest, gin.H{
+			"error": "country code field exceed length limit of 2 elements",
+		})
+		return
+	}
+
 	input := types.Input{
 		Street:      street,
 		City:        city,

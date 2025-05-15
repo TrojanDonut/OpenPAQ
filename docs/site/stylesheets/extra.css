@@ -7,7 +7,12 @@
 }
 
 :root  > * {
-    --md-primary-fg-color: #007a9d;
-    --md-primary-fg-color--light: #f7dcd2;
-    --md-primary-fg-color--dark: #d94e1f;
+    --md-primary-fg-color: #C96567;
+    --md-primary-fg-color--light: #97AABD;
+    --md-primary-fg-color--dark: #644E5B;
+    --md-default-bg-color: #314455;
+
+}
+.md-header__topic {
+    visibility: hidden;
 }

@@ -3,8 +3,6 @@
 Thank you for your interest in contributing to **OpenPAQ**!
 
 We welcome all kinds of contributions — whether you're reporting bugs, suggesting features, or submitting pull requests.
-However, please note that **GitHub Issues and Pull Requests are currently disabled** while we finalize an initial version of the project. 
-Once we're ready, we'll announce the opening of community contributions on the project page.
 
 ---
 

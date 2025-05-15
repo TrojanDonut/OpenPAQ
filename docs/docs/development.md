@@ -1,30 +1,7 @@
 # Development
 
 
-## build the project
 
-```shell
-go build  -o openPAQ -a ./cmd/main.go
-```
-
-## build the container
-```shell
-docker build -t openpaq:latest .
-```
-
-## run the project
-
-```shell
-CACHE_ENABLED=false \
-VERSION=testing \
-CLICKHOUSE_ENABLED=false \
-USE_TLS=false \
-USE_JWT=false \
-NOMINATIM_ADDRESS=https://nominatim.openstreetmap.org/search \
-LOG_LEVEL=debug \
-WEBSERVER_LISTEN_ADDRESS=:8001 \
-go run ./cmd/main.go
-```
 
 ## Program flow
 
@@ -62,6 +39,12 @@ flowchart TD
     LISTMATCHER_EXISTS-->A5[API Response]
     LISTMATCHER_NOT_EXISTS-->A5[API Response]
 ```
+
+## Normalizer
+
+A normalizer is used to apply country specific rules to make validation easier. In most cases entire words or abbreviations are removed
+from the string (e.g. apt for apartment). In other cases abbreviations need to be replaced (e.g. rd -> road). 
+There are multiple normalizers in place right now. In case you want to create your own continue on.
 
 ## Add a normalizer
 

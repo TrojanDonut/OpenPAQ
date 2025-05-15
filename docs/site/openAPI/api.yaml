@@ -6,8 +6,10 @@ info:
   x-logo:
     url: "./logo.png"
     altText: "OpenPAQ API"
-    servers:
-      url: "https://address-validation-api.prod.denic.de"
+servers:
+  - url: http://localhost:8001/
+
+
 
 paths:
   /:
@@ -56,24 +58,32 @@ paths:
           schema:
             type: string
             example: "Theodor-Stern-Kai 1"
+            maxLength: 500
+            description: The maximum allowed length is 500 characters
         - in: query
           name: city
           required: true
           schema:
             type: string
             example: "Frankfurt am Main"
+            maxLength: 100
+            description: The maximum allowed length is 100 characters
         - in: query
           name: postal_code
           required: true
           schema:
             type: string
             example: 60596
+            maxLength: 50
+            description: The maximum allowed length is 50 characters
         - in: query
           name: country_code
           required: true
           schema:
             type: string
             example: 'DE'
+            maxLength: 2
+            description: The maximum allowed length is 2 characters
         - in: query
           name: debug_details
           required: false
@@ -89,6 +99,15 @@ paths:
                 oneOf:
                   - $ref: '#/components/schemas/ResponseWithoutDebug'
                   - $ref: '#/components/schemas/ResponseWithDebug'
+        400:
+          description: Request is not valid
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
 
 components:
   securitySchemes:
