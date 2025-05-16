@@ -1,6 +1,6 @@
 # Overview
 
-OpenPAQ (**OpenP**ostal **A**ddress **Q**uality) is a tool to validate parts of a postal address. Checks are done via an HTTP-Endpoint.
+OpenPAQ (**Open P**ostal **A**ddress **Q**uality) is a tool to validate parts of a postal address. Checks are done via an HTTP-Endpoint.
 
 The following data will be checked:
 

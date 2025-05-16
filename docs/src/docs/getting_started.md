@@ -22,7 +22,12 @@ Install [Golang](https://go.dev/) when you want to compile and run yourself.
 
 
 
-## Run the project
+## Run the project with a minimal configuration
+
+There are two options to run the project. The first is to build the project by yourself. And the second option
+is to run the prebuild container.
+
+#### build the project with go
 
 ```shell
 CACHE_ENABLED=false \
@@ -37,7 +42,7 @@ go run ./cmd/main.go
 ```
 
 
-#### Minimal configuration
+#### run prebuild container
 
 ```shell
 docker run \
@@ -50,7 +55,7 @@ docker run \
 -e LOG_LEVEL=debug \
 -e WEBSERVER_LISTEN_ADDRESS=:8001 \
 -p 8001:8001 \
-ghcr.io/DENICeG/OpenPAQ:latest
+ghcr.io/deniceg/openpaq:latest
 ```
 
 

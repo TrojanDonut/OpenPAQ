@@ -837,7 +837,7 @@
 <h1 id="configuration">Configuration</h1>
 <p>There are mainly two options to get OpenPAQ running. The first option is to compile the code and run the binary directly.</p>
 <p>This section will focus on the available docker container.
-The container is available <a href="ghcr.io/DENICeG/OpenPAQ:latest">here</a>.</p>
+The container is available <a href="ghcr.io/deniceg/openpaq:latest">here</a>.</p>
 <h2 id="overview-of-configurable-components">Overview of configurable components</h2>
 <p>There are several optional configuration items available in OpenPAQ. The following diagram provides an overview about 
 the available components.
@@ -1070,7 +1070,7 @@ reverse proxy which handles the TLS encryption. It is not recommended to run Ope
 -p<span class="w"> </span><span class="m">8001</span>:8001<span class="w"> </span><span class="se">\</span>
 -v<span class="w"> </span>./key.pem:/cert/key.pem<span class="w"> </span><span class="se">\</span>
 -v<span class="w"> </span>./cert.pem:/cert/cert.pem<span class="w"> </span><span class="se">\</span>
-ghcr.io/DENICeG/OpenPAQ:latest
+ghcr.io/deniceg/openpaq:latest
 </code></pre></div>
 <h2 id="configure-authentication">Configure Authentication</h2>
 <p>In some use cases it is necessary to restrict the access to the API. Therefore, OpenPAQ provides a mechanism to protect
@@ -1091,7 +1091,7 @@ the access with a <a href="https://www.rfc-editor.org/rfc/rfc7519.html">JWT</a>.
 -e<span class="w"> </span><span class="nv">LOG_LEVEL</span><span class="o">=</span>debug<span class="w"> </span><span class="se">\</span>
 -e<span class="w"> </span><span class="nv">WEBSERVER_LISTEN_ADDRESS</span><span class="o">=</span>:8001<span class="w"> </span><span class="se">\</span>
 -p<span class="w"> </span><span class="m">8001</span>:8001<span class="w"> </span><span class="se">\</span>
-ghcr.io/DENICeG/OpenPAQ:latest
+ghcr.io/deniceg/openpaq:latest
 </code></pre></div>
 <p>After setting up the service, it shouldn't be possible to access the API without a valid JWT.</p>
 <div class="highlight"><pre><span></span><code>curl<span class="w"> </span>http://127.0.0.1:8001/api/v1/check<span class="se">\</span>
@@ -1142,7 +1142,7 @@ memcached<span class="w"> </span>--memory-limit<span class="o">=</span><span cla
 -e<span class="w"> </span><span class="nv">LOG_LEVEL</span><span class="o">=</span>debug<span class="w"> </span><span class="se">\</span>
 -e<span class="w"> </span><span class="nv">WEBSERVER_LISTEN_ADDRESS</span><span class="o">=</span>:8001<span class="w"> </span><span class="se">\</span>
 -p<span class="w"> </span><span class="m">8001</span>:8001<span class="w"> </span><span class="se">\</span>
-ghcr.io/DENICeG/OpenPAQ:latest
+ghcr.io/deniceg/openpaq:latest
 </code></pre></div>
 <div class="admonition info">
 <p class="admonition-title">Info</p>
@@ -1178,7 +1178,7 @@ a big amount of resources. See <a href="https://nominatim.org/release-docs/5.1/a
 -e<span class="w"> </span><span class="nv">LOG_LEVEL</span><span class="o">=</span>debug<span class="w"> </span><span class="se">\</span>
 -e<span class="w"> </span><span class="nv">WEBSERVER_LISTEN_ADDRESS</span><span class="o">=</span>:8001<span class="w"> </span><span class="se">\</span>
 -p<span class="w"> </span><span class="m">8001</span>:8001<span class="w"> </span><span class="se">\</span>
-ghcr.io/DENICeG/OpenPAQ:latest
+ghcr.io/deniceg/openpaq:latest
 </code></pre></div>
 
 

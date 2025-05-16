@@ -3,7 +3,7 @@
 There are mainly two options to get OpenPAQ running. The first option is to compile the code and run the binary directly.
 
 This section will focus on the available docker container.
-The container is available [here](ghcr.io/DENICeG/OpenPAQ:latest).
+The container is available [here](ghcr.io/deniceg/openpaq:latest).
 
 
 ## Overview of configurable components
@@ -160,7 +160,7 @@ docker run \
 -p 8001:8001 \
 -v ./key.pem:/cert/key.pem \
 -v ./cert.pem:/cert/cert.pem \
-ghcr.io/DENICeG/OpenPAQ:latest
+ghcr.io/deniceg/openpaq:latest
 ```
 
 
@@ -185,7 +185,7 @@ docker run \
 -e LOG_LEVEL=debug \
 -e WEBSERVER_LISTEN_ADDRESS=:8001 \
 -p 8001:8001 \
-ghcr.io/DENICeG/OpenPAQ:latest
+ghcr.io/deniceg/openpaq:latest
 ```
 
 After setting up the service, it shouldn't be possible to access the API without a valid JWT.
@@ -256,7 +256,7 @@ docker run \
 -e LOG_LEVEL=debug \
 -e WEBSERVER_LISTEN_ADDRESS=:8001 \
 -p 8001:8001 \
-ghcr.io/DENICeG/OpenPAQ:latest
+ghcr.io/deniceg/openpaq:latest
 ```
 
 !!! info
@@ -303,7 +303,7 @@ docker run \
 -e LOG_LEVEL=debug \
 -e WEBSERVER_LISTEN_ADDRESS=:8001 \
 -p 8001:8001 \
-ghcr.io/DENICeG/OpenPAQ:latest
+ghcr.io/deniceg/openpaq:latest
 ```
 
 
