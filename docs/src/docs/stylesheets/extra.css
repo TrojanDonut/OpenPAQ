@@ -16,3 +16,12 @@
 .md-header__topic {
     visibility: hidden;
 }
+
+.md-nav__title {
+    font-size: 0!important;
+    line-height: 0!important;
+}
+
+body > div.md-container > main > div > div.md-sidebar.md-sidebar--primary > div > div > nav > label > a {
+    padding-top: 24px!important;
+}
