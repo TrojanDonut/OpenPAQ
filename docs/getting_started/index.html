@@ -322,19 +322,28 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#run-the-project" class="md-nav__link">
+  <a href="#run-the-project-with-a-minimal-configuration" class="md-nav__link">
     <span class="md-ellipsis">
-      Run the project
+      Run the project with a minimal configuration
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Run the project">
+    <nav class="md-nav" aria-label="Run the project with a minimal configuration">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#minimal-configuration" class="md-nav__link">
+  <a href="#build-the-project-with-go" class="md-nav__link">
     <span class="md-ellipsis">
-      Minimal configuration
+      build the project with go
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#run-prebuild-container" class="md-nav__link">
+    <span class="md-ellipsis">
+      run prebuild container
     </span>
   </a>
   
@@ -576,19 +585,28 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#run-the-project" class="md-nav__link">
+  <a href="#run-the-project-with-a-minimal-configuration" class="md-nav__link">
     <span class="md-ellipsis">
-      Run the project
+      Run the project with a minimal configuration
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Run the project">
+    <nav class="md-nav" aria-label="Run the project with a minimal configuration">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#minimal-configuration" class="md-nav__link">
+  <a href="#build-the-project-with-go" class="md-nav__link">
     <span class="md-ellipsis">
-      Minimal configuration
+      build the project with go
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#run-prebuild-container" class="md-nav__link">
+    <span class="md-ellipsis">
+      run prebuild container
     </span>
   </a>
   
@@ -656,7 +674,10 @@ Nominatim (openstreetmap.org) is used as the backend for the address to be check
 <li><a href="https://memcached.org/">Memcached</a></li>
 <li><a href="https://www.openssl.org/">OpenSSL</a></li>
 </ul>
-<h2 id="run-the-project">Run the project</h2>
+<h2 id="run-the-project-with-a-minimal-configuration">Run the project with a minimal configuration</h2>
+<p>There are two options to run the project. The first is to build the project by yourself. And the second option
+is to run the prebuild container.</p>
+<h4 id="build-the-project-with-go">build the project with go</h4>
 <div class="highlight"><pre><span></span><code><span class="nv">CACHE_ENABLED</span><span class="o">=</span><span class="nb">false</span><span class="w"> </span><span class="se">\</span>
 <span class="nv">VERSION</span><span class="o">=</span>testing<span class="w"> </span><span class="se">\</span>
 <span class="nv">CLICKHOUSE_ENABLED</span><span class="o">=</span><span class="nb">false</span><span class="w"> </span><span class="se">\</span>
@@ -667,7 +688,7 @@ Nominatim (openstreetmap.org) is used as the backend for the address to be check
 <span class="nv">WEBSERVER_LISTEN_ADDRESS</span><span class="o">=</span>:8001<span class="w"> </span><span class="se">\</span>
 go<span class="w"> </span>run<span class="w"> </span>./cmd/main.go
 </code></pre></div>
-<h4 id="minimal-configuration">Minimal configuration</h4>
+<h4 id="run-prebuild-container">run prebuild container</h4>
 <div class="highlight"><pre><span></span><code>docker<span class="w"> </span>run<span class="w"> </span><span class="se">\</span>
 -e<span class="w"> </span><span class="nv">CACHE_ENABLED</span><span class="o">=</span><span class="nb">false</span><span class="w"> </span><span class="se">\</span>
 -e<span class="w"> </span><span class="nv">VERSION</span><span class="o">=</span>testing<span class="w"> </span><span class="se">\</span>
@@ -678,7 +699,7 @@ go<span class="w"> </span>run<span class="w"> </span>./cmd/main.go
 -e<span class="w"> </span><span class="nv">LOG_LEVEL</span><span class="o">=</span>debug<span class="w"> </span><span class="se">\</span>
 -e<span class="w"> </span><span class="nv">WEBSERVER_LISTEN_ADDRESS</span><span class="o">=</span>:8001<span class="w"> </span><span class="se">\</span>
 -p<span class="w"> </span><span class="m">8001</span>:8001<span class="w"> </span><span class="se">\</span>
-ghcr.io/DENICeG/OpenPAQ:latest
+ghcr.io/deniceg/openpaq:latest
 </code></pre></div>
 <h4 id="example-request">Example Request</h4>
 <p>Run your request against the new OpenPAQ instance:</p>
