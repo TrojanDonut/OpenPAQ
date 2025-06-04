@@ -58,6 +58,10 @@ func (at *AT) City(s string) (string, error) {
 	s = strings.TrimSpace(s)
 	s = at.reCity.ReplaceAllString(s, "")
 	s = at.reCityStopper.ReplaceAllString(s, "")
+	s = strings.ReplaceAll(s, "ü", "ue")
+	s = strings.ReplaceAll(s, "ä", "ae")
+	s = strings.ReplaceAll(s, "ö", "oe")
+	s = strings.ReplaceAll(s, "ß", "ss")
 
 	return s, nil
 }
