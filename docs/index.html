@@ -539,7 +539,7 @@
 
 
 <h1 id="overview">Overview</h1>
-<p>OpenPAQ (<strong>Open P</strong>ostal <strong>A</strong>ddress <strong>Q</strong>uality) iis a tool designed to validate key components of postal addresses, ensuring data accuracy and integrity. A core capability of OpenPAQ is the normalization of addresses as they are found "in the wild." It transforms diverse and inconsistent address inputs into a standardized format that is valid for performing checks against the OpenStreetMap database.</p>
+<p>OpenPAQ (<strong>Open P</strong>ostal <strong>A</strong>ddress <strong>Q</strong>uality) is a tool designed to validate key components of postal addresses, ensuring data accuracy and integrity. A core capability of OpenPAQ is the normalization of addresses as they are found "in the wild." It transforms diverse and inconsistent address inputs into a standardized format that is valid for performing checks against the OpenStreetMap database.</p>
 <p>Operating via a simple HTTP-Endpoint, OpenPAQ leverages <a href="https://github.com/osm-search/Nominatim">Nominatim</a> in the background to perform its checks. It is tested against a self-hosted Nominatim version from <a href="https://github.com/mediagis/nominatim-docker">mediagis</a>.</p>
 <h4 id="openpaq-checks-the-following-address-components">OpenPAQ checks the following address components:</h4>
 <ul>
@@ -549,10 +549,12 @@
 <li>country code</li>
 </ul>
 <h3 id="key-features-of-openpaq">Key Features of OpenPAQ:</h3>
-<p>OpenPAQ offers the following capabilities in address validation, measured with an internal benchmark of 90 correct and 40 incorrect postal addresses per country:
-1.  International Address Validation: Provides address validation with accuracy levels of approximately 80% or higher for key European countries (DE, NL, AT, CH, FR, GB, IT, PL, DK)
-2.  Correct Address Identification: Achieves a recall rate of approximately 75% or higher for most benchmarked countries in identifying correct addresses.
-3.  Incorrect Address Detection: Offers an F1 score of over 75% for most benchmarked countries in identifying incorrect addresses.</p>
+<p>OpenPAQ offers the following capabilities in address validation, measured with an internal benchmark of 90 correct and 40 incorrect postal addresses per country:</p>
+<ol>
+<li>International Address Validation: Provides address validation with accuracy levels of approximately 80% or higher for key European countries (DE, NL, AT, CH, FR, GB, IT, PL, DK)</li>
+<li>Correct Address Identification: Achieves a recall rate of approximately 75% or higher for most benchmarked countries in identifying correct addresses.</li>
+<li>Incorrect Address Detection: Offers an F1 score of over 75% for most benchmarked countries in identifying incorrect addresses.</li>
+</ol>
 <p><br></p>
 <div class="grid cards">
 <ul>
