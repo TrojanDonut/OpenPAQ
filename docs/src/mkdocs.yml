@@ -10,12 +10,16 @@ nav:
   - OpenAPI: open_api.md
   - Development: development.md
   - Contribution: contributions.md
+  - Changelog: changelog.md
   - License & EOL: license.md
   - Imprint: https://www.denic.de/ueber-denic/impressum
 
 plugins:
   - privacy
-  - swagger-ui-tag
+  - swagger-ui-tag:
+      docExpansion: full
+      background: "#314455"
+      syntaxHighlightTheme: "arta"
   - search:
       lang: en
 
