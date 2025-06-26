@@ -20,9 +20,6 @@ OpenPAQ offers the following capabilities in address validation, measured with a
 2. Correct Address Identification: Achieves a recall rate of approximately 75% or higher for most benchmarked countries in identifying correct addresses.
 3. Incorrect Address Detection: Offers an F1 score of over 75% for most benchmarked countries in identifying incorrect addresses.
 
-
-
-
 <br>
 <div class="grid cards" markdown>
 

@@ -23,6 +23,9 @@
 <input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
 <label class="md-overlay" for="__drawer"></label>
 <div data-md-component="skip">
+<a class="md-skip" href="#compatibility-and-backwards-compatibility-commitment">
+          Skip to content
+        </a>
 </div>
 <div data-md-component="announce">
 </div>
@@ -150,12 +153,34 @@
 </li>
 <li class="md-nav__item md-nav__item--active">
 <input class="md-nav__toggle md-toggle" id="__toc" type="checkbox"/>
+<label class="md-nav__link md-nav__link--active" for="__toc">
+<span class="md-ellipsis">
+    OpenAPI
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
 <a class="md-nav__link md-nav__link--active" href="./">
 <span class="md-ellipsis">
     OpenAPI
     
   </span>
 </a>
+<nav aria-label="Table of contents" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#compatibility-and-backwards-compatibility-commitment">
+<span class="md-ellipsis">
+      Compatibility and Backwards Compatibility Commitment
+    </span>
+</a>
+</li>
+</ul>
+</nav>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link" href="../development/">
@@ -169,6 +194,14 @@
 <a class="md-nav__link" href="../contributions/">
 <span class="md-ellipsis">
     Contribution
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../changelog/">
+<span class="md-ellipsis">
+    Changelog
     
   </span>
 </a>
@@ -198,6 +231,19 @@
 <div class="md-sidebar__scrollwrap">
 <div class="md-sidebar__inner">
 <nav aria-label="Table of contents" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#compatibility-and-backwards-compatibility-commitment">
+<span class="md-ellipsis">
+      Compatibility and Backwards Compatibility Commitment
+    </span>
+</a>
+</li>
+</ul>
 </nav>
 </div>
 </div>
@@ -205,7 +251,13 @@
 <div class="md-content" data-md-component="content">
 <article class="md-content__inner md-typeset">
 <h1>OpenAPI</h1>
-<p><iframe class="swagger-ui-iframe" frameborder="0" id="ec7e6350" onload="this.style.display = 'block'; this.style.overflow = 'hidden'; this.style.width = '100%';" src="swagger-ec7e6350.html" style="display:none;" width="100%"></iframe></p>
+<h2 id="compatibility-and-backwards-compatibility-commitment">Compatibility and Backwards Compatibility Commitment</h2>
+<p>To ensure a smooth transition for our users, we commit to maintaining backwards compatibility with previous versions (e.g. v2) until we can safely deprecate them.</p>
+<p>We will support the old API endpoints for at least 6 months after releasing a new stable version (v3). </p>
+<p>During this period, we will clearly mark deprecated API endpoints in the API documentation and change logs, so users are aware of upcoming changes. </p>
+<p>Our goal is to minimize disruptions and ensure a seamless experience for our users.</p>
+<p><br/><br/>
+<iframe class="swagger-ui-iframe" frameborder="0" id="29befe81" onload="this.style.display = 'block'; this.style.overflow = 'hidden'; this.style.width = '100%';" src="swagger-29befe81.html" style="display:none;" width="100%"></iframe></p>
 </article>
 </div>
 <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>

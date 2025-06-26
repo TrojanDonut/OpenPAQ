@@ -9,7 +9,7 @@
   
 </head>
 
-<body style="overflow:hidden;">
+<body style="overflow:hidden;background: #314455;">
   <div id="swagger-ui"></div>
   <script src="../assets/javascripts/swagger-ui-bundle.js" charset="UTF-8"> </script>
   <script src="../assets/javascripts/swagger-ui-standalone-preset.js" charset="UTF-8"> </script>
@@ -23,14 +23,14 @@
           SwaggerUIStandalonePreset
         ],
         
-        url: "../openAPI/api.yaml",
+        url: "/openAPI/api.yaml",
         
         
         "oauth2RedirectUrl": new URL("../assets/swagger-ui/oauth2-redirect.html",window.location.href).href,
         
         "validatorUrl": "none",
         
-    "docExpansion": "list",
+    "docExpansion": "full",
     "filter": false,
     "tryItOutEnabled": false,
     "supportedSubmitMethods": [
@@ -47,7 +47,7 @@
     "extra_css": [],
     "dark_scheme_name": "slate",
     "filter_files": [],
-    "syntaxHighlight.theme": "agate"
+    "syntaxHighlight.theme": "arta"
 
       })
 
@@ -67,7 +67,7 @@
     }
 
     const resize_ob = new ResizeObserver(function(entries) {
-      parent.update_swagger_ui_iframe_height("ec7e6350");
+      parent.update_swagger_ui_iframe_height("29befe81");
     });
 
     // start observing for resizing
