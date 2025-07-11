@@ -16,13 +16,23 @@ With any major version update, breaking changes may occur that can affect the be
 
 ---
 
-## [5.0.8] - 2025-06-25
+## [5.0.9] - 2025-07-11
+### Changed
+- Changed logo
+
+---
+
+- ## [5.0.8] - 2025-06-25
 ### Added
 - Added changelog and reference for semantic versioning
+
+---
 
 ## [5.0.7] - 2025-06-18
 ### Fixed
 - Fixed documentation list visualisation 
+
+---
 
 ## [5.0.6] - 2025-06-17
 ### Added 
@@ -31,12 +41,14 @@ With any major version update, breaking changes may occur that can affect the be
 ### Fixed
 - Typos in documentation
 
+---
 
 ## [5.0.4] - 2025-06-04
 
 ### Fixed
 - Fixed umlauts for Austrian (at) streets (ü,ä,ö and ß)
 
+---
 
 ## [5.0.3] - 2025-05-16
 
