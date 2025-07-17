@@ -24,7 +24,7 @@ plugins:
       lang: en
 
 theme:
-  logo: img/openpaq-logo-klein.png
+  logo: img/openpaq.svg
   name: material
   features:
     - content.code.copy
