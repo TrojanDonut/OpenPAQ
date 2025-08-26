@@ -2,3 +2,6 @@
 # Local databases
 slovenian_addresses.db
 *.db
+
+# Large dataset CSVs
+RN_SLO_NASLOVI_register_naslovov_*.csv
