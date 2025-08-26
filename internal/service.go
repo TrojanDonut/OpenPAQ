@@ -1,16 +1,18 @@
 package internal
 
 import (
-	"github.com/bradfitz/gomemcache/memcache"
-	"github.com/gin-gonic/gin"
 	"net/http"
 	"openPAQ/internal/algorithms"
 	"openPAQ/internal/listmatcher"
 	types2 "openPAQ/internal/listmatcher/types"
 	"openPAQ/internal/nominatim"
 	"openPAQ/internal/normalization"
+	"openPAQ/internal/slodb"
 	"openPAQ/internal/types"
 	"time"
+
+	"github.com/bradfitz/gomemcache/memcache"
+	"github.com/gin-gonic/gin"
 )
 
 type ServiceConfig struct {
@@ -20,6 +22,7 @@ type ServiceConfig struct {
 	CacheUrl          string
 	UseCaching        bool
 	ClickhouseEnabled bool
+	SIAddressesDBPath string
 }
 
 type Service struct {
@@ -28,6 +31,7 @@ type Service struct {
 	config      *ServiceConfig
 	listMatcher *listmatcher.ListMatcher
 	nominatim   *nominatim.Nominatim
+	siDB        *slodb.SIAddressDB
 	normalizer  *normalization.Normalizer
 	mc          *memcache.Client
 }
@@ -49,12 +53,22 @@ func NewService(config *ServiceConfig, matcherConfig algorithms.MatchSeverityCon
 
 	norma := normalization.NewNormalizer("generic")
 
+	var siDatabase *slodb.SIAddressDB
+	if config.SIAddressesDBPath != "" {
+		var err error
+		siDatabase, err = slodb.NewSIAddressDB(config.SIAddressesDBPath, matcherConfig, norma)
+		if err != nil {
+			panic(err)
+		}
+	}
+
 	service := &Service{
 		engine:      gin.New(),
 		webserver:   nil,
 		config:      config,
 		listMatcher: d,
 		nominatim:   nominatim.NewNominatim(nominatimConfig.Url, nominatimConfig.Languages, matcherConfig, norma, nil),
+		siDB:        siDatabase,
 		normalizer:  norma,
 		mc:          mc,
 	}

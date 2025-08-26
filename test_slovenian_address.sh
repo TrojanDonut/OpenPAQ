@@ -1,119 +1,151 @@
 #!/bin/bash
 
-# OpenPAQ Slovenian Address Tester
-# Usage: ./test_slovenian_address.sh "Tehnološki park 21, 1000 Ljubljana"
+# Test script for OpenPAQ address validation
+# Tests both Slovenian addresses (SQLite) and global addresses (Nominatim)
 
-# Colors for output
-RED='\033[0;31m'
-GREEN='\033[0;32m'
-YELLOW='\033[1;33m'
-BLUE='\033[0;34m'
-NC='\033[0m' # No Color
+BASE_URL="http://127.0.0.1:8080"
+API_ENDPOINT="$BASE_URL/api/v1/check"
 
-# Check if address is provided
-if [ $# -eq 0 ]; then
-    echo -e "${RED}Error: No address provided${NC}"
-    echo "Usage: $0 \"<address>\""
-    echo "Example: $0 \"Tehnološki park 21, 1000 Ljubljana\""
-    exit 1
-fi
+echo "=== OpenPAQ Address Validation Test Suite ==="
+echo "Base URL: $BASE_URL"
+echo ""
 
-# Get the full address
-FULL_ADDRESS="$1"
+# Function to test an address
+test_address() {
+    local street="$1"
+    local city="$2"
+    local postal_code="$3"
+    local country_code="$4"
+    local description="$5"
+    
+    echo "Testing: $description"
+    echo "  Street: $street"
+    echo "  City: $city"
+    echo "  Postal Code: $postal_code"
+    echo "  Country: $country_code"
+    
+    # URL encode the parameters
+    street_encoded=$(echo "$street" | sed 's/ /%20/g')
+    city_encoded=$(echo "$city" | sed 's/ /%20/g')
+    
+    # Make the API call
+    response=$(curl -s "$API_ENDPOINT?street=$street_encoded&city=$city_encoded&postal_code=$postal_code&country_code=$country_code")
+    
+    # Check if the request was successful
+    if [ $? -eq 0 ]; then
+        echo "  Response: $response"
+        
+        # Extract key fields using jq if available
+        if command -v jq &> /dev/null; then
+            street_matched=$(echo "$response" | jq -r '.street_matched // "unknown"')
+            city_matched=$(echo "$response" | jq -r '.city_matched // "unknown"')
+            postal_matched=$(echo "$response" | jq -r '.postal_code_matched // "unknown"')
+            country_matched=$(echo "$response" | jq -r '.country_code_matched // "unknown"')
+            
+            echo "  Results:"
+            echo "    Street matched: $street_matched"
+            echo "    City matched: $city_matched"
+            echo "    Postal code matched: $postal_matched"
+            echo "    Country code matched: $country_matched"
+        fi
+    else
+        echo "  Error: Failed to make API request"
+    fi
+    
+    echo ""
+}
 
-echo -e "${BLUE}=== OpenPAQ Slovenian Address Validator ===${NC}"
-echo -e "${YELLOW}Input address:${NC} $FULL_ADDRESS"
-echo
+# Function to test with debug details
+test_address_debug() {
+    local street="$1"
+    local city="$2"
+    local postal_code="$3"
+    local country_code="$4"
+    local description="$5"
+    
+    echo "Testing (with debug): $description"
+    
+    # URL encode the parameters
+    street_encoded=$(echo "$street" | sed 's/ /%20/g')
+    city_encoded=$(echo "$city" | sed 's/ /%20/g')
+    
+    # Make the API call with debug_details=true
+    response=$(curl -s "$API_ENDPOINT?street=$street_encoded&city=$city_encoded&postal_code=$postal_code&country_code=$country_code&debug_details=true")
+    
+    if [ $? -eq 0 ]; then
+        echo "  Debug Response: $response"
+    else
+        echo "  Error: Failed to make API request"
+    fi
+    
+    echo ""
+}
 
-# Split by comma first
-IFS=',' read -r STREET_PART POSTAL_CITY <<< "$FULL_ADDRESS"
+echo "=== Testing Slovenian Addresses (SQLite Database) ==="
+echo "These tests use the local SQLite database for fast, reliable validation."
+echo ""
 
-if [ -z "$POSTAL_CITY" ]; then
-    echo -e "${RED}Error: Could not parse address format${NC}"
-    echo "Expected format: \"Street [Number], PostalCode City\""
-    echo "Example: \"Tehnološki park 21, 1000 Ljubljana\""
-    exit 1
-fi
+# Test 1: Valid Slovenian address from our CSV data
+test_address "Trzinska cesta" "Mengeš" "1234" "si" "Valid Slovenian address (Mengeš)"
 
-# Extract postal code and city from the second part
-if [[ $POSTAL_CITY =~ ^[[:space:]]*([0-9]{4})[[:space:]]+(.+)$ ]]; then
-    POSTAL_CODE="${BASH_REMATCH[1]}"
-    CITY="${BASH_REMATCH[2]}"
-    STREET="$STREET_PART"
-else
-    echo -e "${RED}Error: Could not parse postal code and city${NC}"
-    echo "Expected format: \"Street [Number], PostalCode City\""
-    echo "Example: \"Tehnološki park 21, 1000 Ljubljana\""
-    exit 1
-fi
+# Test 2: Another valid Slovenian address
+test_address "Cesta VIII" "Grič" "1310" "si" "Valid Slovenian address (Grič)"
 
-echo -e "${YELLOW}Parsed components:${NC}"
-echo "  Street: $STREET"
-echo "  Postal Code: $POSTAL_CODE"
-echo "  City: $CITY"
-echo "  Country: SI"
-echo
+# Test 3: Slovenian address with partial postal code
+test_address "Šentviška pot" "Čatež ob Savi" "8250" "si" "Valid Slovenian address (Čatež ob Savi)"
 
-# URL encode the components
-STREET_ENCODED=$(echo "$STREET" | sed 's/ /+/g')
-CITY_ENCODED=$(echo "$CITY" | sed 's/ /+/g')
+# Test 4: Invalid Slovenian address
+test_address "Nonexistent Street" "Nonexistent City" "9999" "si" "Invalid Slovenian address"
 
-# Make the API call
-echo -e "${YELLOW}Making API call to OpenPAQ...${NC}"
-echo
+echo "=== Testing Global Addresses (Nominatim) ==="
+echo "These tests use the Nominatim API for global address validation."
+echo ""
 
-API_URL="http://127.0.0.1:8001/api/v1/check?street=${STREET_ENCODED}&postal_code=${POSTAL_CODE}&city=${CITY_ENCODED}&country_code=SI&debug_details=false"
+# Test 5: German address
+test_address "Unter den Linden" "Berlin" "10117" "de" "Valid German address (Berlin)"
 
-# Get the response
-RESPONSE=$(curl -s "$API_URL")
+# Test 6: French address
+test_address "Champs-Élysées" "Paris" "75008" "fr" "Valid French address (Paris)"
 
-# Check if curl was successful
-if [ $? -ne 0 ]; then
-    echo -e "${RED}Error: Failed to connect to OpenPAQ API${NC}"
-    echo "Make sure OpenPAQ is running on http://127.0.0.1:8001"
-    exit 1
-fi
+# Test 7: UK address
+test_address "Oxford Street" "London" "W1C 1AP" "gb" "Valid UK address (London)"
 
-# Parse JSON response (simple parsing)
-STREET_MATCHED=$(echo "$RESPONSE" | grep -o '"street_matched":[^,]*' | cut -d':' -f2)
-CITY_MATCHED=$(echo "$RESPONSE" | grep -o '"city_matched":[^,]*' | cut -d':' -f2)
-POSTAL_MATCHED=$(echo "$RESPONSE" | grep -o '"postal_code_matched":[^,]*' | cut -d':' -f2)
-CITY_POSTAL_MATCHED=$(echo "$RESPONSE" | grep -o '"city_to_postal_code_matched":[^,]*' | cut -d':' -f2)
-COUNTRY_MATCHED=$(echo "$RESPONSE" | grep -o '"country_code_matched":[^,]*' | cut -d':' -f2)
+# Test 8: US address
+test_address "Times Square" "New York" "10036" "us" "Valid US address (New York)"
 
-echo -e "${BLUE}=== Validation Results ===${NC}"
+# Test 9: Invalid global address
+test_address "Fake Street 123" "Fake City" "00000" "us" "Invalid global address"
 
-# Display results with colors
-if [ "$STREET_MATCHED" = "true" ]; then
-    echo -e "  Street: ${GREEN}✓ Valid${NC}"
-else
-    echo -e "  Street: ${RED}✗ Invalid${NC}"
-fi
+echo "=== Testing Edge Cases ==="
+echo ""
 
-if [ "$CITY_MATCHED" = "true" ]; then
-    echo -e "  City: ${GREEN}✓ Valid${NC}"
-else
-    echo -e "  City: ${RED}✗ Invalid${NC}"
-fi
+# Test 10: Empty fields
+test_address "" "" "" "si" "Empty fields (Slovenian)"
 
-if [ "$POSTAL_MATCHED" = "true" ]; then
-    echo -e "  Postal Code: ${GREEN}✓ Valid${NC}"
-else
-    echo -e "  Postal Code: ${RED}✗ Invalid${NC}"
-fi
+# Test 11: Very long street name
+test_address "This is a very long street name that might cause issues with the API" "Ljubljana" "1000" "si" "Long street name"
 
-if [ "$CITY_POSTAL_MATCHED" = "true" ]; then
-    echo -e "  City-Postal Match: ${GREEN}✓ Valid${NC}"
-else
-    echo -e "  City-Postal Match: ${RED}✗ Invalid${NC}"
-fi
+# Test 12: Special characters
+test_address "Študentovska ulica" "Ljubljana" "1000" "si" "Slovenian address with special characters"
 
-if [ "$COUNTRY_MATCHED" = "true" ]; then
-    echo -e "  Country: ${GREEN}✓ Valid${NC}"
-else
-    echo -e "  Country: ${RED}✗ Invalid${NC}"
-fi
+echo "=== Debug Testing ==="
+echo "Testing with debug_details=true to see detailed matching information"
+echo ""
 
-echo
-echo -e "${BLUE}=== Raw API Response ===${NC}"
-echo "$RESPONSE" | python3 -m json.tool 2>/dev/null || echo "$RESPONSE" 
+# Test with debug details for a valid Slovenian address
+test_address_debug "Trzinska cesta" "Mengeš" "1234" "si" "Valid Slovenian address with debug details"
+
+# Test with debug details for a valid global address
+test_address_debug "Unter den Linden" "Berlin" "10117" "de" "Valid German address with debug details"
+
+echo "=== Performance Testing ==="
+echo "Testing response times for different address types"
+echo ""
+
+# Test Slovenian address performance
+echo "Testing Slovenian address response time:"
+time curl -s "$API_ENDPOINT?street=Trzinska%20cesta&city=Menge%C5%A1&postal_code=1234&country_code=si" > /dev/null
+
+echo ""
+echo "Testing global address response time:"
+time curl -s "$API_ENDPOINT?street=Unter%20den%20Linden&city=Berlin&postal_code=10117&country_code=de" > /dev/null

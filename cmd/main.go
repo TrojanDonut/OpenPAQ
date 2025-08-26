@@ -2,14 +2,15 @@ package main
 
 import (
 	"fmt"
-	"github.com/hbollon/go-edlib"
-	log "github.com/sirupsen/logrus"
 	"openPAQ/internal"
 	"openPAQ/internal/algorithms"
 	diytypes "openPAQ/internal/listmatcher/types"
 	"openPAQ/internal/types"
 	"os"
 	"strings"
+
+	"github.com/hbollon/go-edlib"
+	log "github.com/sirupsen/logrus"
 )
 
 func init() {
@@ -116,6 +117,7 @@ func main() {
 		UseCaching:        enableCache,
 		CacheUrl:          cacheUrl,
 		ClickhouseEnabled: clickhouseEnabled,
+		SIAddressesDBPath: func() string { v, _ := os.LookupEnv("SI_ADDRESSES_DB_PATH"); return v }(),
 	}, matchSeverityConfig, nominatimConfig)
 
 	log.Error(service.Start())

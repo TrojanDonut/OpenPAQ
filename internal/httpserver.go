@@ -7,17 +7,18 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"net/http"
+	"openPAQ/internal/algorithms"
+	"openPAQ/internal/types"
+	"strings"
+	"time"
+
 	"github.com/bradfitz/gomemcache/memcache"
 	"github.com/gin-gonic/gin"
 	"github.com/golang-jwt/jwt/v5"
 	"github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 	log "github.com/sirupsen/logrus"
-	"net/http"
-	"openPAQ/internal/algorithms"
-	"openPAQ/internal/types"
-	"strings"
-	"time"
 )
 
 var (
@@ -195,7 +196,12 @@ func (s *Service) checkHandler(ctx *gin.Context) {
 			defer cancel()
 
 			pairMatchesDiy := s.listMatcher.Handle(ctx2, input)
-			pairMatchesNominatim := s.nominatim.Handle(ctx2, input)
+			var pairMatchesExternal <-chan types.PairMatching
+			if input.CountryCode == "si" && s.siDB != nil {
+				pairMatchesExternal = s.siDB.Handle(ctx2, input)
+			} else {
+				pairMatchesExternal = s.nominatim.Handle(ctx2, input)
+			}
 
 			for counter := 0; counter < 2; counter++ {
 				select {
@@ -215,8 +221,8 @@ func (s *Service) checkHandler(ctx *gin.Context) {
 						source.CityMatched = source.CityMatched || res.CityMatched
 						source.StreetMatched = source.StreetMatched || res.StreetMatched
 					}
-				case r := <-pairMatchesNominatim:
-					pairMatchesNominatim = nil
+				case r := <-pairMatchesExternal:
+					pairMatchesExternal = nil
 					if res, ok := eval(r, input.CountryCode); ok {
 						debugDude = r
 						source = res
@@ -237,13 +243,18 @@ func (s *Service) checkHandler(ctx *gin.Context) {
 			}
 		}()
 	} else {
-		pairMatchesNominatim := <-s.nominatim.Handle(ctx2, input)
-		source.StreetMatched = pairMatchesNominatim.StreetCityMatch || pairMatchesNominatim.PostalCodeStreetMatch
-		source.CityMatched = pairMatchesNominatim.CityPostalCodeMatch || pairMatchesNominatim.StreetCityMatch
-		source.PostalCodeMatched = pairMatchesNominatim.PostalCodeStreetMatch || pairMatchesNominatim.CityPostalCodeMatch
-		source.CityToPostalCodeMatched = pairMatchesNominatim.CityPostalCodeMatch
-		source.CountryCodeMatched = types.CountryCodeCheck(input.CountryCode, pairMatchesNominatim)
-		debugDude = pairMatchesNominatim
+		var extRes types.PairMatching
+		if input.CountryCode == "si" && s.siDB != nil {
+			extRes = <-s.siDB.Handle(ctx2, input)
+		} else {
+			extRes = <-s.nominatim.Handle(ctx2, input)
+		}
+		source.StreetMatched = extRes.StreetCityMatch || extRes.PostalCodeStreetMatch
+		source.CityMatched = extRes.CityPostalCodeMatch || extRes.StreetCityMatch
+		source.PostalCodeMatched = extRes.PostalCodeStreetMatch || extRes.CityPostalCodeMatch
+		source.CityToPostalCodeMatched = extRes.CityPostalCodeMatch
+		source.CountryCodeMatched = types.CountryCodeCheck(input.CountryCode, extRes)
+		debugDude = extRes
 	}
 
 	var matcherConfig algorithms.MatchSeverityConfig
